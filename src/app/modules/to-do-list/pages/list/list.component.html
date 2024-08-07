@@ -1,0 +1,29 @@
+@if(!getListItems().length){
+    <div class="container">
+        <img src="assets/img/task-list-null.png" alt="Sua lista está vazia - imagem ilustrativa" loading="eager">
+        @if(addItem()){
+    
+            <button class="btn btn-primary" (click)="addItem.set(false)">Crie a sua lista de tarefas</button>
+        } @else {
+            <app-input-add-item 
+                [inputListItems]="getListItems()"
+                (outputAddListItem)="getInputAndAddItem($event)"
+            />
+        }
+    
+    </div>
+}@else{
+    <app-input-add-item 
+        [inputListItems]="getListItems()"
+        (outputAddListItem)="getInputAndAddItem($event)"
+    />
+
+    <main class="container">
+       <app-input-list-item [inputListItems]="getListItems()"/>
+    </main>
+    <footer>
+        <button class="btn btn-danger">
+            Deletar todos os itens
+        </button>           
+    </footer>
+}
