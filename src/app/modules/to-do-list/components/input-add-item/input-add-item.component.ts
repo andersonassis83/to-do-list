@@ -1,7 +1,16 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
-import { NgClass } from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  inject,
+} from '@angular/core';
 
-//Interfaces
+// Interfaces
+import { NgClass } from '@angular/common';
 import { IListItems } from '../../interface/IListItems.interface';
 
 
@@ -15,11 +24,13 @@ import { IListItems } from '../../interface/IListItems.interface';
 export class InputAddItemComponent {
   #cdr = inject(ChangeDetectorRef);
 
-  @ViewChild("inputText") public inputText!: ElementRef;
-  @Input({required: true}) public inputListItems: IListItems[] =[];
+  @ViewChild('inputText') public inputText!: ElementRef;
+
+  @Input({ required: true }) public inputListItems: IListItems[] = [];
+
   @Output() public outputAddListItem = new EventEmitter<IListItems>();
-  public focusAndAddItem(value: string){
-    if(value){
+  public focusAndAddItem(value: string) {
+    if (value) {
       this.#cdr.detectChanges();
       this.inputText.nativeElement.value = '';
 
@@ -30,8 +41,9 @@ export class InputAddItemComponent {
       this.outputAddListItem.emit({
         id,
         checked: false,
-        value,       
+        value,
       });
+
       return this.inputText.nativeElement.focus();
     }
   }
